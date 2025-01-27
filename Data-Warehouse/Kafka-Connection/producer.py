@@ -15,7 +15,7 @@ producer = KafkaProducer(
 def fetch_thingsboard_data(url, access_token):
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {access_token}"  # Use token-based authentication
+        "Authorization": f"Bearer {access_token}" 
     }
     response = requests.get(url, headers=headers)
     
@@ -28,13 +28,12 @@ def fetch_thingsboard_data(url, access_token):
 
 if __name__ == "__main__":
 
-    THINGSBOARD_HOST = "localhost"  # Replace with your host
-    ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"  # Replace with your API token
-    DEVICE_ID = "YOUR_DEVICE_ID"  # Replace with your device ID
+    THINGSBOARD_HOST = "localhost"  
+    ACCESS_TOKEN = "YOUR_ACCESS_TOKEN" 
+    DEVICE_ID = "YOUR_DEVICE_ID" 
     API_URL = f"http://{THINGSBOARD_HOST}:8080/api/v1/{DEVICE_ID}/attributes"
 
     while True:
-        # Fetch data from ThingsBoard
         thingsboard_data = fetch_thingsboard_data(API_URL, ACCESS_TOKEN)
         
         if thingsboard_data:

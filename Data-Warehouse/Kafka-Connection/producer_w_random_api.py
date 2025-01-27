@@ -31,7 +31,6 @@ if __name__ == "__main__":
         if api_data:
             print(f"Fetched API data: {api_data}")
 
-            # Send data to Kafka topic
             producer.send("random_api_data", api_data)
             print("Data sent to Kafka topic 'random_api_data'")
 

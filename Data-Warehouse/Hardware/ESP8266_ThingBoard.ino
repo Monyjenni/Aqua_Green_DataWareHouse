@@ -1,12 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-#define BLYNK_TEMPLATE_ID "TMPL6CqtyYMKo"
-#define BLYNK_TEMPLATE_NAME "plant watering system"
-#define BLYNK_AUTH_TOKEN "1AC5i4K0AYyOEd6pp0Ud_JcUP-U-uj24"
-#define BLYNK_PRINT Serial
-
-// Wi-Fi credentials
 char ssid[] = "Meisme";
 char pass[] = "me200604!";
 
@@ -18,8 +12,8 @@ const char* accessToken = "u1M2pfyA7aCxwoSlLmTj"; // Replace with your ThingsBoa
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-#define MOISTURE_SENSOR_PIN A0  // Pin connected to moisture sensor
-#define RELAY_PIN D3            // Pin connected to relay
+#define MOISTURE_SENSOR_PIN A0 
+#define RELAY_PIN D3      
 
 const int moistureThreshold = 50;
 
@@ -73,7 +67,6 @@ void loop() {
     digitalWrite(RELAY_PIN, HIGH); // Turn off relay
     Serial.println("Water Pump OFF");
   }
-
   delay(1000); // Wait 1 second between readings
   Blynk.run(); // Run Blynk to maintain connection
   client.loop(); // Maintain MQTT connection to ThingsBoard
