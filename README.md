@@ -3,6 +3,10 @@
 ## Architecture Overview
 <img width="1313" alt="Screenshot 2025-01-27 at 9 09 32 in the morning" src="https://github.com/user-attachments/assets/6b3b8e14-6449-461b-acd7-4750fa4643f3" />
 
+## Kafka and Schema Registry
+
+![Kafka-Schema-Registry-1024x536-671754554](https://github.com/user-attachments/assets/22bff7bc-ea6d-41dd-a621-d42b52966a0c)
+
 ## Set up Zookeeper, Kafka Cluster, and CMAK (Cluster Manager Apache Kafka)
 https://www.youtube.com/watch?v=F6PUQ3k6zmg&t=1880s
 
@@ -29,3 +33,49 @@ bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080 \
 1. Cd to Kafka Connection Directory
 2. Activate Python Environment: source kafka-env1/bin/activate
 3. Command to run: python consumer.python   
+
+### Docker Compose
+#### Docker Compose Ymal 
+(FYI: Kafka, Zookeeper, and CMAK were already installed in local machine, so we just took their IP address to config in this file below down there)
+
+version: "3.7"
+services:
+  debezium:
+    image: debezium/connect:1.4
+    environment:
+      BOOTSTRAP_SERVERS: 192.168.1.68:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: connect_configs
+      OFFSET_STORAGE_TOPIC: connect_offsets
+      KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://192.168.1.68:8081
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://192.168.1.68:8081
+    depends_on: []
+    ports: 
+      - "8083:8083"
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.5.3
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 192.168.1.68:2181
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    ports:
+      - "8081:8081"
+
+#### DebeZium
+{
+  "name": "exampledb-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "plugin.name": "pgoutput",
+    "database.hostname": "localhost",
+    "database.port": "5432",
+    "database.user": "docker",
+    "database.password": "docker",
+    "database.dbname": "exampledb",
+    "database.server.name": "postgres",
+    "table.include.list": "public.student"
+  }
+}
