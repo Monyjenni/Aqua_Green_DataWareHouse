@@ -1,11 +1,7 @@
 # Aqua_Green_DataWareHouse
 
 ## Architecture Overview
-<img width="1313" alt="Screenshot 2025-01-27 at 9 09 32 in the morning" src="https://github.com/user-attachments/assets/6b3b8e14-6449-461b-acd7-4750fa4643f3" />
-
-## Kafka and Schema Registry
-
-![Kafka-Schema-Registry-1024x536-671754554](https://github.com/user-attachments/assets/22bff7bc-ea6d-41dd-a621-d42b52966a0c)
+<img width="1175" alt="Screenshot 2025-01-28 at 11 29 15 in the morning" src="https://github.com/user-attachments/assets/8cc7097a-ccf5-4361-82a7-42393b575894" />
 
 ## Set up Zookeeper, Kafka Cluster, and CMAK (Cluster Manager Apache Kafka)
 https://www.youtube.com/watch?v=F6PUQ3k6zmg&t=1880s
