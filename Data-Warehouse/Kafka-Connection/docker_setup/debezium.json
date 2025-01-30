@@ -1,14 +1,15 @@
 {
-  "name": "exampledb-connector",
+  "name": "postgres-connector",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "plugin.name": "pgoutput",
-    "database.hostname": "localhost",
+    "database.hostname": "192.168.1.68",
     "database.port": "5432",
     "database.user": "docker",
     "database.password": "docker",
-    "database.dbname": "exampledb",
+    "database.dbname": "AquaGreen",
     "database.server.name": "postgres",
-    "table.include.list": "public.student"
+    "database.history.kafka.bootstrap.servers": "localhost:9092",
+    "database.history.kafka.topic": "schema-changes.customers"
   }
 }
